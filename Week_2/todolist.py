@@ -1,5 +1,21 @@
+import os
+
+def load_tasks (filename="tasks.txt") :
+    if not os.path.exists("tasks.txt") :
+        return []
+    else:
+        with open("tasks.txt", "r") as f:
+            return [line.strip() for line in  f.readlines()]
+
+def save_tasks (tasks, filename = "tasks.txt") :
+    with open("tasks.txt", "w") as f:
+        for task in tasks:
+            f.write(task + "\n")
+
+
+
 def tasks_function () :
-    tasks  = []
+    tasks  = load_tasks("tasks.txt")
 
     while True :
         print("What would you like to do? \n"
@@ -24,6 +40,7 @@ def tasks_function () :
                     print(f"{i}. {task}")
         
         elif command == "3" :
+            save_tasks(tasks, "tasks.txt")
             print("Goodbye!")
             break
         
